@@ -25,5 +25,13 @@ class AccountAdmin(UserAdmin):
     ordering = ('phone_number',)
 
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('first_name','last_name','phone_number','visit_counter')
+    def first_name(self,obj):
+        return obj.account.first_name
+    def last_name(self,obj):
+        return obj.account.last_name
+    def phone_number(self,obj):
+        return obj.account.phone_number
 admin.site.register(get_user_model(), AccountAdmin)
-admin.site.register(Profile)
+admin.site.register(Profile, ProfileAdmin)
