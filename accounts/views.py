@@ -29,7 +29,7 @@ class IncreaseCounter(APIView):
 
 class LoginAccount(APIView):
     @staticmethod
-    def post(request):
+    def get(request):
         phone_number,password = decode(request.headers['Authorization'])
         print(phone_number,password)
         account = authenticate(username=phone_number,password=password)
