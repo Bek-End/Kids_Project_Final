@@ -34,7 +34,9 @@ class LoginAccount(APIView):
         print(phone_number,password)
         account = authenticate(username=phone_number,password=password)
         if account is not None:
-            return Response({"authorized":"true"})
+            profile = Profile.objects.get(account=account)
+            serializer = ProfileSerializer(profile)
+            return Response(serializer.data)
         else:
             return Response({"authorized":"false"})
 
