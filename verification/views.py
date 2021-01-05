@@ -9,8 +9,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 from accounts.models import Account,Profile
 
-SMS_AERO_API_KEY = "oGjmLlpreCDVJ68xl5LY0YewYGbQ"
-SMS_AERO_USERNAME = "muminovkorolbek@gmail.com"
+SMS_AERO_API_KEY = "qjlmzWpiiIyI2fGGwKNDyaJLZL"
+SMS_AERO_USERNAME = "savrulloevsunnatzhon@gmail.com"
 SMS_AERO_URL = "https://email:api_key@gate.smsaero.ru/v2/sms/send"
 
 # This class returns the string needed to generate the key
