@@ -36,7 +36,7 @@ class LoginAccount(APIView):
         if account is not None:
             profile = Profile.objects.get(account=account)
             serializer = ProfileSerializer(profile)
-            return Response(serializer.data+{"authorized":"true"})
+            return Response(serializer.data+"authorized:true")
         else:
             return Response({"authorized":"false"})
 
