@@ -9,8 +9,8 @@ from accounts.serializers import ProfileSerializer
 class IncreaseCounter(APIView):
 
     @staticmethod
-    def post(request):
-        phone_number = request.data['phone_number']
+    def post(request, phone):
+        phone_number = phone
         account = Account.objects.get(phone_number=phone_number)
         profile = Profile.objects.get(account=account)
         profile.visit_counter += 1
