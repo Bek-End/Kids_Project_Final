@@ -21,8 +21,8 @@ class IncreaseCounter(APIView):
             return Response({"ticket":"You dont have a free ticket","visits":f"{profile.visit_counter}"})
 
     @staticmethod
-    def get(request):
-        phone_number = request.data['phone_number']
+    def get(request,phone):
+        phone_number = phone
         account = Account.objects.get(phone_number=phone_number)
         profile = Profile.objects.get(account=account)
         return Response({"visits":f"{profile.visit_counter}"})
