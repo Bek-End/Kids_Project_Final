@@ -9,8 +9,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 from accounts.models import Account,Profile
 
-SMS_AERO_API_KEY = "qjlmzWpiiIyI2fGGwKNDyaJLZL"
-SMS_AERO_USERNAME = "savrulloevsunnatzhon@gmail.com"
+SMS_AERO_API_KEY = "p56Y8j13AhS5mvN1WUXdtDnNeGF"
+SMS_AERO_USERNAME = "savrulloevsunrise@gmail.com"
 SMS_AERO_URL = "https://email:api_key@gate.smsaero.ru/v2/sms/send"
 
 # This class returns the string needed to generate the key
@@ -76,7 +76,7 @@ class getPhoneNumberRegistered(APIView):
         return Response("OTP is wrong", status=400)
 
 # Time after which OTP will expire
-EXPIRY_TIME = 720 # seconds
+EXPIRY_TIME = 1020 # seconds
 
 class getPhoneNumberRegistered_TimeBased(APIView):
     # Get to Create a call for OTP
