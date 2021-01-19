@@ -122,7 +122,7 @@ class getPhoneNumberRegistered_TimeBased(APIView):
             Mobile.save()
             first_name = request.data["first_name"]
             last_name = request.data['last_name']
-            phone_number = request.data['phone_number']
+            phone_number = phone
             password = request.data['password']
             user = Account.objects.create_user(first_name=first_name,last_name=last_name,password=password,phone_number=phone_number)
             user.save()
