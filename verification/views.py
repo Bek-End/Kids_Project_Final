@@ -90,6 +90,10 @@ class getPhoneNumberRegistered_TimeBased(APIView):
         if Mobile > 0:
             return Response("Phone number already exists")
         else:
+            phoneModel.objects.create(
+                phone_number=phone,
+            )
+            Mobile = phoneModel.objects.get(phone_number=phone)
             Mobile.save()  # Save the data
             keygen = generateKey()
             key = base64.b32encode(keygen.returnValue(phone).encode())  # Key is generated
