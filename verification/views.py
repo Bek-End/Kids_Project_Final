@@ -89,7 +89,7 @@ class getPhoneNumberRegistered_TimeBased(APIView):
         user = Account.objects.filter(phone_number=phone).count()
         mobile = phoneModel.objects.filter(phone_number=phone).count()
         if user > 0:
-            return Response({"status":"Phone number already exists"})
+            return Response("Phone number already exists")
         elif mobile > 0:
             Mobile = phoneModel.objects.get(phone_number=phone)
         else:
