@@ -89,6 +89,7 @@ class getPhoneNumberRegistered_TimeBased(APIView):
         try:
             Mobile = phoneModel.objects.get(phone_number=phone)  # if Mobile already exists the take this else create New One
         except ObjectDoesNotExist:
+            return Response("Phone number already exists")
             phoneModel.objects.create(
                 phone_number=phone,
             )
