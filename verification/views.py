@@ -86,31 +86,27 @@ class getPhoneNumberRegistered_TimeBased(APIView):
     # Get to Create a call for OTP
     @staticmethod
     def get(request, phone):
-        try:
-            Mobile = phoneModel.objects.get(phone_number=phone)  # if Mobile already exists the take this else create New One
-        except ObjectDoesNotExist:
+        Mobile = phoneModel.objects.filter(phone_number=phone).count()  # user Newly created Model
+        if Mobile > 0:
             return Response("Phone number already exists")
-            phoneModel.objects.create(
-                phone_number=phone,
-            )
-            Mobile = phoneModel.objects.get(phone_number=phone)  # user Newly created Model
-        Mobile.save()  # Save the data
-        keygen = generateKey()
-        key = base64.b32encode(keygen.returnValue(phone).encode())  # Key is generated
-        OTP = pyotp.TOTP(key,interval = EXPIRY_TIME)  # TOTP Model for OTP is created
-        print(OTP.now())
-        custom_params = {
-            "number":phone,
-            "text":f"Your one time code is: {OTP.now()}",
-            "sign":"SMS Aero"
-            }
-        r = requests.get(
-            url = SMS_AERO_URL,
-            params=custom_params,
-            auth=HTTPBasicAuth(SMS_AERO_USERNAME,SMS_AERO_API_KEY)
-            )
-        # Using Multi-Threading send the OTP Using Messaging Services like Twilio or Fast2sms
-        return Response({"OTP": OTP.now(),"Responded":r.json()}, status=200)  # Just for demonstration
+        else:
+            Mobile.save()  # Save the data
+            keygen = generateKey()
+            key = base64.b32encode(keygen.returnValue(phone).encode())  # Key is generated
+            OTP = pyotp.TOTP(key,interval = EXPIRY_TIME)  # TOTP Model for OTP is created
+            print(OTP.now())
+            custom_params = {
+                "number":phone,
+                "text":f"Your one time code is: {OTP.now()}",
+                "sign":"SMS Aero"
+                }
+            r = requests.get(
+                url = SMS_AERO_URL,
+                params=custom_params,
+                auth=HTTPBasicAuth(SMS_AERO_USERNAME,SMS_AERO_API_KEY)
+                )
+            # Using Multi-Threading send the OTP Using Messaging Services like Twilio or Fast2sms
+            return Response({"OTP": OTP.now(),"Responded":r.json()}, status=200)  # Just for demonstration
 
     # This Method verifies the OTP
     @staticmethod
