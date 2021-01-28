@@ -42,7 +42,7 @@ class getPhoneNumberRegistered(APIView):
             "text":f"Your one time code is: {OTP.at(Mobile.counter)}",
             "sign":"SMS Aero"
         }
-        r = requests.get(
+        requests.get(
             url = SMS_AERO_URL,
             params=custom_params,
             auth=HTTPBasicAuth(SMS_AERO_USERNAME,SMS_AERO_API_KEY)
@@ -66,11 +66,15 @@ class getPhoneNumberRegistered(APIView):
             Mobile.save()
             first_name = request.data["first_name"]
             last_name = request.data['last_name']
+            middle_name = request.data['middle_name']
             phone_number = phone
             password = request.data['password']
             user = Account.objects.create_user(first_name=first_name,last_name=last_name,password=password,phone_number=phone_number)
             user.save()
-            account = Profile.objects.create(account=user,visit_counter=0)
+            if middle_name == "null":
+                account = Profile.objects.create(account=user,visit_counter=0)
+            else:
+                account = Profile.objects.create(account=user,visit_counter=0,middle_name=middle_name)
             account.save()
             return Response("You are authorised", status=200)
         return Response("OTP is wrong", status=400)
@@ -122,11 +126,15 @@ class getPhoneNumberRegistered_TimeBased(APIView):
             Mobile.save()
             first_name = request.data["first_name"]
             last_name = request.data['last_name']
+            middle_name = request.data['middle_name']
             phone_number = phone
             password = request.data['password']
             user = Account.objects.create_user(first_name=first_name,last_name=last_name,password=password,phone_number=phone_number)
             user.save()
-            account = Profile.objects.create(account=user,visit_counter=0)
+            if middle_name == "null":
+                account = Profile.objects.create(account=user,visit_counter=0)
+            else:
+                account = Profile.objects.create(account=user,visit_counter=0,middle_name=middle_name)
             account.save()
             return Response("You are authorised", status=200)
         return Response("OTP is wrong/expired", status=400)

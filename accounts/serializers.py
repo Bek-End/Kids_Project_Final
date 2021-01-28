@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models import Profile, Account
+from accounts.models import Profile
 
 class ProfileSerializer(serializers.ModelSerializer):
     first_name = serializers.SerializerMethodField('get_first_name')
@@ -13,4 +13,4 @@ class ProfileSerializer(serializers.ModelSerializer):
         return obj.account.phone_number
     class Meta:
         model = Profile
-        fields = ('first_name','last_name','phone_number','visit_counter')
+        fields = ('first_name','last_name','phone_number','middle_name','visit_counter')

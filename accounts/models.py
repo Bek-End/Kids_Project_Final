@@ -1,8 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
 
 class AccountManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -11,7 +9,6 @@ class AccountManager(BaseUserManager):
         """Create and save a User with the given email and password."""
         if not phone_number:
             raise ValueError('The given phone must be set')
-        phone_number = phone_number
         user = self.model(phone_number=phone_number, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -48,8 +45,9 @@ class Account(AbstractUser):
 class Profile(models.Model):
     account = models.OneToOneField(Account,on_delete=models.CASCADE,verbose_name='Account')
     visit_counter = models.IntegerField(default=0,blank=False,verbose_name='The number of visits')
+    middle_name = models.CharField(blank=True,max_length=40,verbose_name="Middle Name")
     class Meta:
         verbose_name='Profile'
         verbose_name_plural = 'Profiles'
     def __str__(self):
-        return (f"{self.account.first_name} {self.account.last_name} {self.account.phone_number}")
+        return (f"{self.account.first_name} {self.account.last_name} {self.middle_name} {self.account.phone_number} {self.visit_counter}")

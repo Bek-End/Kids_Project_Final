@@ -26,7 +26,7 @@ class AccountAdmin(UserAdmin):
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('first_name','last_name','phone_number','visit_counter')
+    list_display = ('first_name','last_name','middle_name','phone_number','visit_counter')
     def first_name(self,obj):
         return obj.account.first_name
     def last_name(self,obj):
