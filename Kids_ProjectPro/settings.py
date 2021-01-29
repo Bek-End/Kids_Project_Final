@@ -27,7 +27,7 @@ SECRET_KEY = '%_4a#tl2jsx1v+9%!zn_xfnp@2n9_s4brysd$rrh)vfp-7qwp6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['kids-project-pro.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['kids-project-pro.herokuapp.com', '127.0.0.1','tigra01.tmweb.ru']
 
 
 # Application definition
