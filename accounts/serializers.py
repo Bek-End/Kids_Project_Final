@@ -13,4 +13,4 @@ class ProfileSerializer(serializers.ModelSerializer):
         return obj.account.phone_number
     class Meta:
         model = Profile
-        fields = ('first_name','last_name','phone_number','middle_name','visit_counter')
+        fields = ('first_name','last_name','phone_number','child_name','visit_counter')

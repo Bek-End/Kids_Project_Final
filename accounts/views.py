@@ -42,7 +42,7 @@ class LoginAccount(APIView):
 class GetAccounts(APIView):
     @staticmethod
     def get(request):
-        profiles = Profile.objects.filter(visit_counter__gte=1).order_by("-visit_counter")
+        profiles = Profile.objects.filter(visit_counter__gte=1)
         serializers = ProfileSerializer(profiles,many=True)
         return Response(serializers.data)
 # Create your views here.
