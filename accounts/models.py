@@ -39,15 +39,15 @@ class Account(AbstractUser):
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=False,unique=True,verbose_name='Phone')
+    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=False,unique=True,verbose_name='Телефон')
     objects = AccountManager()
 
 class Profile(models.Model):
-    account = models.OneToOneField(Account,on_delete=models.CASCADE,verbose_name='Account')
-    visit_counter = models.IntegerField(default=0,blank=False,verbose_name='The number of visits')
-    middle_name = models.CharField(blank=True,max_length=40,verbose_name="Middle Name")
+    account = models.OneToOneField(Account,on_delete=models.CASCADE,verbose_name='Аккаунт')
+    visit_counter = models.IntegerField(default=0,blank=False,verbose_name='Количество посещений')
+    child_name = models.CharField(blank=True,max_length=40,verbose_name="Имя ребенка")
     class Meta:
-        verbose_name='Profile'
-        verbose_name_plural = 'Profiles'
+        verbose_name='Профиль'
+        verbose_name_plural = 'Профили'
     def __str__(self):
-        return (f"{self.account.first_name} {self.account.last_name} {self.middle_name} {self.account.phone_number} {self.visit_counter}")
+        return (f"{self.account.first_name} {self.account.last_name} {self.child_name} {self.account.phone_number} {self.visit_counter}")
