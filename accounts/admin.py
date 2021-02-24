@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 from accounts.models import Profile
+from accounts.models import TigraAdmin
 
 
 class AccountAdmin(UserAdmin):
@@ -34,5 +35,7 @@ class ProfileAdmin(admin.ModelAdmin):
         return obj.account.last_name
     def phone_number(self,obj):
         return obj.account.phone_number
+
 admin.site.register(get_user_model(), AccountAdmin)
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(TigraAdmin)

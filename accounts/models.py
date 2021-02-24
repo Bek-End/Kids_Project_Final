@@ -51,3 +51,12 @@ class Profile(models.Model):
         verbose_name_plural = 'Профили'
     def __str__(self):
         return (f"{self.account.first_name} {self.account.last_name} {self.child_name} {self.account.phone_number} {self.visit_counter}")
+
+class TigraAdmin(models.Model):
+    username = models.CharField(max_length=40,verbose_name="Имя пользователя", unique=True)
+    password = models.CharField(max_length=40,verbose_name="Пароль")
+    class Meta:
+        verbose_name='Тигра Админ'
+        verbose_name_plural='Тигра Админы'
+    def __str__(self):
+        return (f"{self.username} {self.password}")
