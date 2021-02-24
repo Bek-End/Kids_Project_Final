@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from accounts.models import Account,Profile
+from accounts.models import Account,Profile,TigraAdmin
 from basicauth import decode
 from django.contrib.auth import authenticate
 from accounts.serializers import ProfileSerializer
@@ -45,5 +45,14 @@ class GetAccounts(APIView):
         profiles = Profile.objects.filter(visit_counter__gte=1).order_by("-account")
         serializers = ProfileSerializer(profiles,many=True)
         return Response(serializers.data)
-# Create your views here.
 
+class LoginTigraAdmin(APIView):
+    @staticmethod
+    def post(request):
+        username,password = decode(request.headers['Authorization'])
+        print("username "+username+"password "+password)
+        account = TigraAdmin.objects.filter(password=password,username=username).count()
+        if(account > 0):
+            return Response({"status":"successfully logged in"})
+        else:
+            return Response({"status":"failed to log in"})
