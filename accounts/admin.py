@@ -36,6 +36,9 @@ class ProfileAdmin(admin.ModelAdmin):
     def phone_number(self,obj):
         return obj.account.phone_number
 
+class TigraCustomAdmin(admin.ModelAdmin):
+    list_display = ('username','password')
+
 admin.site.register(get_user_model(), AccountAdmin)
 admin.site.register(Profile, ProfileAdmin)
-admin.site.register(TigraAdmin)
+admin.site.register(TigraAdmin,TigraCustomAdmin)
